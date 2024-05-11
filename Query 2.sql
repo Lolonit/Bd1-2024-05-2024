@@ -143,3 +143,43 @@ SELECT
 FROM
     `sched`
 GROUP BY den_ned, idgroups, num_ned;
+
+/* Предложение HAVING при группировке
+*/
+SELECT 
+    `pnamedisc` as 'Наименование дисциплины', COUNT(pnamedisc) as 'Количество повторений'
+FROM
+    discipl
+GROUP BY pnamedisc
+having COUNT(pnamedisc) > 1;
+
+SELECT 
+    `pnamedisc` as 'Наименование дисциплины', COUNT(pnamedisc) as 'Количество повторений'
+FROM
+    discipl
+WHERE pnamedisc like '%базы данных%'
+GROUP BY pnamedisc
+having COUNT(pnamedisc) > 0;
+/* Самостоятельный запрос
+*/
+
+SELECT 
+	num_ned as 'номер недели',
+    den_ned as 'день недели',
+    idgroups as 'Айди группы',
+    COUNT(num_par) as 'Количество пар'
+FROM
+    `sched`
+GROUP BY den_ned, idgroups, num_ned
+Having COUNT(num_par) > 1;
+
+SELECT 
+	num_ned as 'номер недели',
+    den_ned as 'день недели',
+    idgroups as 'Айди группы',
+    COUNT(num_par) as 'Количество пар'
+FROM
+    `sched`
+WHERE idgroups = 4
+GROUP BY den_ned, idgroups, num_ned
+Having COUNT(num_par) > 1;
